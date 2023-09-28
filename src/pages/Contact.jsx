@@ -6,10 +6,10 @@ import useForm from "../hooks/useForm"
 const Contact = () => {
 
     const initialData = {
-        name: '',
-        email: '',
-        subject: '',
-        msg: ''
+        nombre: '',
+        correo: '',
+        asunto: '',
+        mensaje: ''
     }
 
     //? toast.success('Correo enviado', {position: "center", style: {background: "#101010", color: #fff}})
@@ -17,31 +17,31 @@ const Contact = () => {
     const onValidate = (form) => {
         let errors = {}
         let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
-        let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
+        let regexCorreo = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/;
         let regexComments = /^.{1,1000}$/;
 
-        if (!form.name.trim()) {
-            errors.name = 'El campo "Nombre" no debe ser vacío.'
-        } else if (!regexName.test(form.name)) {
-            errors.name = 'El campo "Nombre" solo acepta letras y espacios.'
+        if (!form.nombre.trim()) {
+            errors.nombre = 'El campo "Nombre" no debe ser vacío.'
+        } else if (!regexName.test(form.nombre)) {
+            errors.nombre = 'El campo "Nombre" solo acepta letras y espacios.'
         }
 
-        if (!form.email.trim()) {
-            errors.email = 'El campo "Correo" no debe ser vacío.'
-        } else if (!regexEmail.test(form.email)) {
-            errors.email = 'El campo "Correo" contiene un formato inválido.'
+        if (!form.correo.trim()) {
+            errors.correo = 'El campo "Correo" no debe ser vacío.'
+        } else if (!regexCorreo.test(form.correo)) {
+            errors.correo = 'El campo "Correo" contiene un formato inválido.'
         }
 
-        if (!form.subject.trim()) {
-            errors.subject = 'El campo "Asunto" no debe ser vacío.'
-        } else if (!regexComments.test(form.subject)) {
-            errors.subject = 'El campo "Asunto" solo acepta letras y espacios.'
+        if (!form.asunto.trim()) {
+            errors.asunto = 'El campo "Asunto" no debe ser vacío.'
+        } else if (!regexComments.test(form.asunto)) {
+            errors.asunto = 'El campo "Asunto" solo acepta letras y espacios.'
         }
 
-        if (!form.msg.trim()) {
-            errors.msg = 'El campo "Mensaje" no debe ser vacío.'
-        } else if (!regexComments.test(form.msg)) {
-            errors.msg = 'El campo "Mensaje" acepta solo 1000 caracteres.'
+        if (!form.mensaje.trim()) {
+            errors.mensaje = 'El campo "Mensaje" no debe ser vacío.'
+        } else if (!regexComments.test(form.mensaje)) {
+            errors.mensaje = 'El campo "Mensaje" acepta solo 1000 caracteres.'
         }
 
         return errors
@@ -71,14 +71,14 @@ const Contact = () => {
                                 className='form-input h-[50px] form-input_request_quotation'
                                 placeholder=' '
                                 type="text"
-                                name='name'
-                                value={form.name}
+                                name='nombre'
+                                value={form.nombre}
                                 onChange={handleChange}
                             />
                             <span className='form-input_label'>Nombre</span>
                         </label>
-                        {errors.name &&
-                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.name}</div>
+                        {errors.nombre &&
+                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.nombre}</div>
                         }
 
                         <label className='text-left form-group mt-4'>
@@ -86,15 +86,15 @@ const Contact = () => {
                                 className='form-input h-[50px] form-input_request_quotation'
                                 placeholder=' '
                                 type="text"
-                                name='email'
-                                value={form.email}
+                                name='correo'
+                                value={form.correo}
                                 onChange={handleChange}
                             />
                             <span className='form-input_label'>Correo</span>
 
                         </label>
-                        {errors.email &&
-                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.email}</div>
+                        {errors.correo &&
+                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.correo}</div>
                         }
 
                         <label className='text-left form-group mt-4'>
@@ -102,31 +102,31 @@ const Contact = () => {
                                 className='form-input h-[50px] form-input_request_quotation'
                                 placeholder=' '
                                 type="text"
-                                name='subject'
-                                value={form.subject}
+                                name='asunto'
+                                value={form.asunto}
                                 onChange={handleChange}
                             />
                             <span className='form-input_label'>Asunto</span>
                         </label>
-                        {errors.subject &&
-                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.subject}</div>
+                        {errors.asunto &&
+                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.asunto}</div>
                         }
 
                         <label className='text-left form-group mt-4 !min-h-[100px]'>
                             <textarea
                                 className='form-input !h-[100px] !min-h-[100px] p-2 form-input_request_quotation'
                                 placeholder=' '
-                                name="msg"
+                                name="mensaje"
                                 cols="30"
                                 rows="10"
-                                value={form.msg}
+                                value={form.mensaje}
                                 onChange={handleChange}
                             ></textarea>
                             <span className='form-input_label'>Mensaje</span>
 
                         </label>
-                        {errors.msg &&
-                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.msg}</div>
+                        {errors.mensaje &&
+                            <div className='border rounded bg-[#ffc0c093] p-[5px] !text-red-500 font-semibold h-[100%] flex justify-center items-center'>{errors.mensaje}</div>
                         }
 
                         <div className='flex justify-center items-center'>

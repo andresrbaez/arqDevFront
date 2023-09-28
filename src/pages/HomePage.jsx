@@ -9,7 +9,7 @@ const HomePage = () => {
             </div>
             <div className='home'>
                 <div className='home_name'>
-                    <h1 className='title-name'>
+                    <h1 className='title-name animate-fade-down animate-once animate-ease-out animate-normal animate-fill-forwards'>
                         Juan Fernando Barona Morales
                     </h1>
                 </div>
