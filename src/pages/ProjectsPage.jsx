@@ -1,9 +1,24 @@
-import React from 'react';
+import React, {lazy, useEffect, useState} from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import ProjectsList from '../components/ProjectsList';
+// import ProjectsList from '../components/ProjectsList';
+import { getAllProjects } from '../api/projects.api'
+import { PuffLoader } from "react-spinners";
 
+const LazyProjectList = lazy(() => import('../components/ProjectsList'))
 const ProjectsPage = () => {
+    const [method, setMethod] = useState([])
+
+    useEffect(() => {
+
+        async function loadProjects() {
+            const res = await getAllProjects()
+            setMethod(res.config.method)
+            console.log("respuesta: ", res.config.method)
+        }
+        loadProjects()
+    }, [])
+    
     return (
         <div className="App">
             <NavBar />
@@ -38,7 +53,15 @@ const ProjectsPage = () => {
                 </div>
 
             </div>
-            <ProjectsList/>
+
+
+            {
+                method !== "get" ? 
+                <div className='w-full flex justify-center items-center'>
+                    <PuffLoader color="#7d717177" /> 
+                </div>
+                : <LazyProjectList/>
+            }
             <Footer />
 
         </div>
