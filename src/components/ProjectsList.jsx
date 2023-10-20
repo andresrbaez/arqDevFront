@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { getAllProjects } from '../api/projects.api'
 import { useNavigate } from 'react-router-dom';
+import proyectos from '../json/proyectos.json'
 
 const ProjectsList = () => {
 
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState(proyectos);
     const [project, setProject] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function loadProjects() {
-            const res = await getAllProjects()
-            setProjects(res.data)
-        }
-        loadProjects()
-    }, [])
+    //     async function loadProjects() {
+    //         const res = await getAllProjects()
+    //         setProjects(res.data)
+    //     }
+    //     loadProjects()
+    // }, [])
+
+    // console.log(proyectos)
 
     const selectProject = (e) => {
         setProject(e);

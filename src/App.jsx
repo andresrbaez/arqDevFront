@@ -3,7 +3,7 @@ import './App.css'
 import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
-const Info = lazy(() => import('./pages/Info'))
+// const Info = lazy(() => import('./pages/Info'))
 const Contact = lazy(() => import('./pages/Contact'))
 import { PuffLoader } from "react-spinners";
 import { Toaster } from 'react-hot-toast'

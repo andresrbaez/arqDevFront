@@ -1,34 +1,61 @@
-import React, {lazy, useEffect, useState} from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 // import ProjectsList from '../components/ProjectsList';
 import { getAllProjects } from '../api/projects.api'
 import { PuffLoader } from "react-spinners";
+import { useWindowSize } from '@uidotdev/usehooks'
 
 const LazyProjectList = lazy(() => import('../components/ProjectsList'))
 const ProjectsPage = () => {
-    const [method, setMethod] = useState([])
+    // const [method, setMethod] = useState([])
+    const [loading, setLoading] = useState(true);
+    const window = useWindowSize()
+
+    // useEffect(() => {
+
+    //     async function loadProjects() {
+    //         const res = await getAllProjects()
+    //         setMethod(res.config.method)
+    //     }
+    //     loadProjects()
+    // }, [])
 
     useEffect(() => {
+        // Muestra el spinner después de 2 segundos (2000 milisegundos)
+        const timeout = setTimeout(() => {
+            setLoading(false);
+        }, 2000);
 
-        async function loadProjects() {
-            const res = await getAllProjects()
-            setMethod(res.config.method)
-            console.log("respuesta: ", res.config.method)
-        }
-        loadProjects()
-    }, [])
-    
+        return () => {
+            // Limpia el timeout cuando el componente se desmonta
+            clearTimeout(timeout);
+        };
+    }, []);
+
+    // console.log(loading)
+
     return (
         <div className="App">
             <NavBar />
-            <div className='header w-full'>
-                <div className='w-[35%]'>
-                    <h1>
-                        Juan Fernando Barona Morales
-                    </h1>
+            <div className='header_project w-full'>
+                <div className='mb-[40px]'>
+                    {window.width <= 412 ?
+                        <h1 className='text-center text-[40px] flex flex-col'>
+                            <span>
+                                Juan Fernando
+                            </span>
+                            <span>
+                                Barona Morales
+                            </span>
+                        </h1>
+                        :
+                        <h1 className='text-center'>
+                            Juan Fernando Barona Morales
+                        </h1>
+                    }
                 </div>
-                <div className='text-justify w-[65%] px-12'>
+                <div className='text-justify px-12'>
                     <h2 className='title_h2'>
                         Diseño Industrial y Arquitectura
                     </h2>
@@ -56,11 +83,12 @@ const ProjectsPage = () => {
 
 
             {
-                method !== "get" ? 
-                <div className='w-full flex justify-center items-center'>
-                    <PuffLoader color="#7d717177" /> 
-                </div>
-                : <LazyProjectList/>
+                // method !== "get" ?
+                loading ?
+                    <div className='w-full flex justify-center items-center'>
+                        <PuffLoader color="#7d717177" />
+                    </div>
+                    : <LazyProjectList />
             }
             <Footer />
 
